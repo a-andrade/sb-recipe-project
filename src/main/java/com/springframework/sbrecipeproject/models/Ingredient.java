@@ -11,22 +11,15 @@ public class Ingredient {
     private Long id;
 
     @Lob
-    private String desciption;
+    private String description;
 
     private BigDecimal amount;
 
-    //private UnitOfMeasure unitOfMeasure;
+    @OneToOne(fetch = FetchType.EAGER) // no cascade; explicit fetch call demonstration
+    private UnitOfMeasure uom;
 
     @ManyToOne
     private Recipe recipe;
-
-    public String getDesciption() {
-        return desciption;
-    }
-
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
-    }
 
     public BigDecimal getAmount() {
         return amount;
@@ -34,6 +27,30 @@ public class Ingredient {
 
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public UnitOfMeasure getUom() {
+        return uom;
+    }
+
+    public void setUom(UnitOfMeasure uom) {
+        this.uom = uom;
     }
 
     public Recipe getRecipe() {
