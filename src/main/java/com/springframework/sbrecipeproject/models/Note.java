@@ -6,8 +6,8 @@ import javax.persistence.*;
 public class Note {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // automatic generation of a sequence
-    private Long id; // int limits the amount generated compared to long
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne // no cascade; it we delete note, we dont want to delete its recipe
     private Recipe recipe;
