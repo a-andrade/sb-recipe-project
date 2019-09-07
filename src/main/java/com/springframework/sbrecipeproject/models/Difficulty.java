@@ -2,5 +2,5 @@ package com.springframework.sbrecipeproject.models;
 
 public enum Difficulty {
 
-    EASY, MDOERATE, HARD
+    EASY, MODERATE, HARD
 }

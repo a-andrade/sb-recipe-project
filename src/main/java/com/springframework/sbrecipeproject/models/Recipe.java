@@ -1,6 +1,7 @@
 package com.springframework.sbrecipeproject.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,10 +17,12 @@ public class Recipe {
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe") // target property = recipe
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob // binary long object
     private Byte[] image;
@@ -33,8 +36,8 @@ public class Recipe {
     @ManyToMany
     @JoinTable(name = "recipe_category",
                 joinColumns = @JoinColumn(name = "recipe_id"),
-                inverseJoinColumns = @JoinColumn(name = "cetegory_id"))
-    private Set<Category> categories;
+                inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -108,6 +111,13 @@ public class Recipe {
         this.image = image;
     }
 
+    // build bi-directional association in setter rather than outside of this class
+    public Recipe addIngredient(Ingredient ingredient) {
+        ingredient.setRecipe(this);
+        this.ingredients.add(ingredient);
+        return this;
+    }
+
     public Set<Ingredient> getIngredients() {
         return ingredients;
     }
@@ -130,6 +140,7 @@ public class Recipe {
 
     public void setNote(Note note) {
         this.note = note;
+        note.setRecipe(this); // build bi-directional association in setter rather than outside of this class
     }
 
     public Set<Category> getCategories() {
