@@ -48,6 +48,7 @@
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <!-- adding project lombok dependency -->
         <dependency>
             <groupId>org.projectlombok</groupId>
