@@ -19,8 +19,6 @@ public class UnitOfMeasureRepositoryTestIT {
     @Autowired
     UnitOfMeasureRepository unitOfMeasureRepository;
 
-
-
     @Before
     public void setUp() throws Exception {
     }

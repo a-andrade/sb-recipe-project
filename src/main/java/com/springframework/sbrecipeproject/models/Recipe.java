@@ -50,7 +50,9 @@ public class Recipe {
     }
 
     public void setNote(Note note) {
-        this.note = note;
-        note.setRecipe(this); // build bi-directional association in setter rather than outside of this class
+        if (note != null) {
+            this.note = note;
+            note.setRecipe(this); // build bi-directional association in setter rather than outside of this class
+        }
     }
 }
