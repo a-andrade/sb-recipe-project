@@ -13,13 +13,13 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
 
     private final CategoryToCategoryCommand categoryConverter;
     private final IngredientToIngredientCommand ingredientConverter;
-    private final NoteToNoteCommand notesConverter;
+    private final NoteToNoteCommand noteConverter;
 
     public RecipeToRecipeCommand(CategoryToCategoryCommand categoryConverter, IngredientToIngredientCommand ingredientConverter,
-                                 NoteToNoteCommand notesConverter) {
+                                 NoteToNoteCommand noteConverter) {
         this.categoryConverter = categoryConverter;
         this.ingredientConverter = ingredientConverter;
-        this.notesConverter = notesConverter;
+        this.noteConverter = noteConverter;
     }
 
     @Synchronized
@@ -40,7 +40,8 @@ public class RecipeToRecipeCommand implements Converter<Recipe, RecipeCommand>{
         command.setServings(source.getServings());
         command.setSource(source.getSource());
         command.setUrl(source.getUrl());
-        command.setNote(notesConverter.convert(source.getNote()));
+        command.setImage(source.getImage());
+        command.setNote(noteConverter.convert(source.getNote()));
 
         if (source.getCategories() != null && source.getCategories().size() > 0){
             source.getCategories()
