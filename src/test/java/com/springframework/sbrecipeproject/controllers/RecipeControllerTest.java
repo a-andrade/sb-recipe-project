@@ -1,6 +1,7 @@
 package com.springframework.sbrecipeproject.controllers;
 
 import com.springframework.sbrecipeproject.commands.RecipeCommand;
+import com.springframework.sbrecipeproject.exceptions.NotFoundException;
 import com.springframework.sbrecipeproject.models.Recipe;
 import com.springframework.sbrecipeproject.services.RecipeService;
 import org.junit.Before;
@@ -50,6 +51,16 @@ public class RecipeControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
+    }
+
+    @Test
+    public void testGetRecipeNotFound() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setId(1L);
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/1/show")).andExpect(status().isNotFound());
     }
 
     @Test
